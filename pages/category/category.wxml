@@ -1,0 +1,50 @@
+<view class="page">
+  <view class="search-bar" bindtap="goSearch">
+    <text class="search-icon">🔍</text>
+    <text class="search-placeholder">搜索商品</text>
+  </view>
+
+  <view class="body" wx:if="{{categories.length > 0}}">
+    <!-- 左侧一级分类 -->
+    <scroll-view class="primary" scroll-y>
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="primary-item {{current === index ? 'active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onPrimaryTap"
+      >
+        <view class="primary-indicator" wx:if="{{current === index}}"></view>
+        <text class="ellipsis">{{item.categoryName}}</text>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧二级分类 -->
+    <scroll-view class="secondary" scroll-y>
+      <block wx:for="{{categories[current].children}}" wx:key="id" wx:for-item="child">
+        <view class="secondary-group-title">{{child.categoryName}}</view>
+        <view class="secondary-grid" wx:if="{{child.children && child.children.length > 0}}">
+          <view class="secondary-item" wx:for="{{child.children}}" wx:key="id" wx:for-item="leaf" data-item="{{leaf}}" bindtap="onSecondaryTap">
+            <image class="secondary-icon img-holder" src="{{leaf.iconThumbUrl || leaf.iconOssId || ''}}" mode="aspectFill" />
+            <text class="ellipsis secondary-name">{{leaf.categoryName}}</text>
+          </view>
+        </view>
+        <view class="secondary-grid" wx:else>
+          <view class="secondary-item" data-item="{{child}}" bindtap="onSecondaryTap">
+            <image class="secondary-icon img-holder" src="{{child.iconThumbUrl || child.iconOssId || ''}}" mode="aspectFill" />
+            <text class="ellipsis secondary-name">{{child.categoryName}}</text>
+          </view>
+        </view>
+      </block>
+      <view class="empty" wx:if="{{!categories[current].children || categories[current].children.length === 0}}">
+        <view class="empty-icon">📦</view>
+        <view>该分类下暂无子分类</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && categories.length === 0}}">
+    <view class="empty-icon">🗂️</view>
+    <view>暂无分类数据</view>
+  </view>
+</view>

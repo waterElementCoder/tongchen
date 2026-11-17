@@ -1,0 +1,39 @@
+<view class="page">
+  <!-- 状态 Tab -->
+  <view class="tabs">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab {{current === item.key ? 'active' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="onTabTap"
+    >{{item.name}}</view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="orders">
+    <view class="order card" wx:for="{{filtered}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+      <view class="order-head">
+        <text class="order-no">订单号：{{item.orderNo}}</text>
+        <text class="order-status {{item.statusType}}">{{item.statusText}}</text>
+      </view>
+      <view class="order-goods">
+        <image wx:for="{{item.items}}" wx:for-item="g" wx:key="id" class="order-thumb img-holder" src="{{g.imageUrl}}" mode="aspectFill" />
+      </view>
+      <view class="order-foot">
+        <text class="order-count">共{{item.productCount}}件</text>
+        <view class="price">
+          <text class="order-pay-label">实付：</text>
+          <text class="price-symbol">¥</text>
+          <text class="order-pay-num">{{item.payYuan}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && filtered.length === 0}}">
+    <view class="empty-icon">📋</view>
+    <view>暂无相关订单</view>
+    <view class="empty-btn btn-secondary" bindtap="goHome">去逛逛</view>
+  </view>
+</view>

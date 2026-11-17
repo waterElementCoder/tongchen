@@ -1,0 +1,69 @@
+<view class="page">
+  <!-- 用户信息头 -->
+  <view class="header">
+    <view class="user-row" bindtap="onUserRowTap">
+      <view class="avatar">
+        <image wx:if="{{userInfo && (userInfo.avatarUrl || userInfo.avatar)}}" class="avatar-img" src="{{userInfo.avatarUrl || userInfo.avatar}}" mode="aspectFill" />
+        <text wx:else class="avatar-holder">👤</text>
+      </view>
+      <view class="user-info">
+        <view class="user-name">{{logged ? (nickname || '日喜用户') : '点击登录'}}</view>
+        <view class="user-desc">{{logged ? (phone ? phone : '未绑定手机号') : '登录后同步订单与地址'}}</view>
+      </view>
+      <view class="login-btn btn-secondary" wx:if="{{!logged}}" catchtap="goLogin">去登录</view>
+    </view>
+  </view>
+
+  <!-- 订单入口 -->
+  <view class="panel card">
+    <view class="panel-head" bindtap="goAllOrders">
+      <text class="panel-title">我的订单</text>
+      <text class="panel-more">全部订单 ›</text>
+    </view>
+    <view class="order-tabs">
+      <view class="order-tab" wx:for="{{orderTabs}}" wx:key="key" data-key="{{item.key}}" bindtap="goOrders">
+        <text class="order-tab-icon">{{item.icon}}</text>
+        <text class="order-tab-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 常用功能 -->
+  <view class="panel card">
+    <view class="cell" bindtap="goAddress">
+      <text class="cell-icon">📍</text>
+      <text class="cell-name">收货地址</text>
+      <text class="cell-arrow">›</text>
+    </view>
+    <view class="cell" bindtap="goFavorites">
+      <text class="cell-icon">♥</text>
+      <text class="cell-name">我的收藏（{{favCount}}）</text>
+      <text class="cell-arrow">›</text>
+    </view>
+    <view class="cell" bindtap="goSweet">
+      <text class="cell-icon">🎁</text>
+      <text class="cell-name">喜糖定制</text>
+      <text class="cell-arrow">›</text>
+    </view>
+    <view class="cell" bindtap="goAbout">
+      <text class="cell-icon">ℹ️</text>
+      <text class="cell-name">关于日喜优选</text>
+      <text class="cell-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 账号 -->
+  <view class="panel card" wx:if="{{logged}}">
+    <view class="cell">
+      <text class="cell-icon">📱</text>
+      <text class="cell-name">手机号</text>
+      <text class="cell-value" wx:if="{{phone}}">{{phone}}</text>
+      <button wx:else class="phone-btn" open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber">去绑定</button>
+    </view>
+    <view class="cell" bindtap="onLogout">
+      <text class="cell-icon">🚪</text>
+      <text class="cell-name">退出登录</text>
+      <text class="cell-arrow">›</text>
+    </view>
+  </view>
+</view>

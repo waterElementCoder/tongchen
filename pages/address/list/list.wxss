@@ -1,0 +1,72 @@
+.page {
+  padding: 24rpx 24rpx 160rpx;
+}
+.addr {
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.addr-main {
+  flex: 1;
+  min-width: 0;
+}
+.addr-top {
+  display: flex;
+  align-items: baseline;
+  gap: 16rpx;
+}
+.addr-name {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.addr-phone {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+.addr-default {
+  background: #e6f7f4;
+  color: #14b8a6;
+  font-size: 20rpx;
+  border-radius: 8rpx;
+  padding: 4rpx 12rpx;
+}
+.addr-line {
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: #4b5563;
+  line-height: 1.5;
+}
+.addr-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-left: 20rpx;
+}
+.addr-action {
+  font-size: 24rpx;
+  color: #6b7280;
+  padding: 4rpx 8rpx;
+}
+.addr-del {
+  color: #ef4444;
+}
+.addr-check {
+  color: #14b8a6;
+  font-size: 26rpx;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  padding: 16rpx 24rpx calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(31, 41, 55, 0.06);
+}
+.add-btn {
+  width: 100%;
+}

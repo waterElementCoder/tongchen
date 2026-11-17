@@ -1,0 +1,159 @@
+.page {
+  padding: 24rpx;
+  padding-bottom: 160rpx;
+}
+
+.address {
+  display: flex;
+  align-items: center;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+.addr-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+.addr-info {
+  flex: 1;
+  min-width: 0;
+}
+.addr-top {
+  display: flex;
+  gap: 16rpx;
+  align-items: baseline;
+}
+.addr-name {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.addr-phone {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+.addr-detail {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: #4b5563;
+  line-height: 1.5;
+}
+.addr-arrow {
+  color: #d1d5db;
+  font-size: 40rpx;
+  margin-left: 12rpx;
+}
+.address-empty {
+  color: #6b7280;
+}
+.addr-plus {
+  font-size: 40rpx;
+  color: #14b8a6;
+  margin-right: 16rpx;
+}
+
+.goods {
+  padding: 8rpx 28rpx;
+  margin-bottom: 20rpx;
+}
+.goods-item {
+  display: flex;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f3f4f6;
+}
+.goods-item:last-child {
+  border-bottom: none;
+}
+.goods-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}
+.goods-info {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20rpx;
+}
+.goods-name {
+  font-size: 26rpx;
+  line-height: 1.4;
+}
+.goods-spec {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #9ca3af;
+}
+.goods-bottom {
+  margin-top: 10rpx;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.goods-price-num {
+  font-size: 30rpx;
+}
+.goods-qty {
+  color: #9ca3af;
+  font-size: 24rpx;
+}
+
+.remark {
+  display: flex;
+  align-items: center;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+.remark-label {
+  width: 160rpx;
+  color: #6b7280;
+  font-size: 26rpx;
+}
+.remark-input {
+  flex: 1;
+  font-size: 26rpx;
+}
+
+.amount {
+  padding: 12rpx 28rpx;
+  margin-bottom: 20rpx;
+}
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  font-size: 26rpx;
+  color: #4b5563;
+}
+.amount-discount {
+  color: #ef4444;
+}
+
+.submit-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16rpx 24rpx calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(31, 41, 55, 0.06);
+}
+.total {
+  display: flex;
+  align-items: baseline;
+  margin-right: 24rpx;
+}
+.total-label {
+  font-size: 24rpx;
+  color: #6b7280;
+}
+.total-num {
+  font-size: 40rpx;
+}
+.submit-btn {
+  width: 260rpx;
+}
+.submit-btn.disabled {
+  opacity: 0.6;
+}

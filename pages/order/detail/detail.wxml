@@ -1,0 +1,69 @@
+<view class="page" wx:if="{{order}}">
+  <!-- 状态横幅 -->
+  <view class="banner banner-{{statusInfo.type}}">
+    <view class="banner-status">{{statusInfo.text}}</view>
+    <view class="banner-desc" wx:if="{{statusInfo.type === 'pay'}}">订单已锁定库存，请尽快完成支付</view>
+    <view class="banner-desc" wx:else>感谢您的购买</view>
+  </view>
+
+  <!-- 收货信息 -->
+  <view class="addr card" wx:if="{{address}}">
+    <view class="addr-icon">📍</view>
+    <view class="addr-info">
+      <view class="addr-top">
+        <text class="addr-name">{{address.receiverName}}</text>
+        <text class="addr-phone">{{address.receiverPhone}}</text>
+      </view>
+      <view class="addr-detail">{{address.provinceName}}{{address.cityName}}{{address.districtName}}{{address.detailAddress}}</view>
+    </view>
+  </view>
+
+  <!-- 商品清单 -->
+  <view class="goods card">
+    <view class="goods-item" wx:for="{{items}}" wx:key="id" data-pid="{{item.productId}}" bindtap="goGoods">
+      <image class="goods-img img-holder" src="{{item.imageUrl}}" mode="aspectFill" />
+      <view class="goods-info">
+        <view class="goods-name ellipsis-2">{{item.name}}</view>
+        <view class="goods-spec ellipsis" wx:if="{{item.specText}}">{{item.specText}}</view>
+        <view class="goods-bottom">
+          <view class="price"><text class="price-symbol">¥</text><text class="goods-price-num">{{item.priceYuan}}</text></view>
+          <text class="goods-qty">×{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 金额 -->
+  <view class="amount card">
+    <view class="amount-row"><text>商品金额</text><text>¥{{productYuan}}</text></view>
+    <view class="amount-row"><text>运费</text><text>{{freightAmount > 0 ? '¥' + freightYuan : '免运费'}}</text></view>
+    <view class="amount-row" wx:if="{{discountAmount > 0}}"><text>优惠</text><text class="amount-discount">-¥{{discountYuan}}</text></view>
+    <view class="amount-row amount-total">
+      <text>实付款</text>
+      <view class="price"><text class="price-symbol">¥</text><text class="total-num">{{payYuan}}</text></view>
+    </view>
+  </view>
+
+  <!-- 订单信息 -->
+  <view class="meta card">
+    <view class="meta-row">
+      <text>订单编号</text>
+      <view class="meta-value" bindtap="copyOrderNo">{{order.orderNo}} <text class="copy">复制</text></view>
+    </view>
+    <view class="meta-row" wx:if="{{order.createTime}}">
+      <text>下单时间</text>
+      <text class="meta-value">{{order.createTime}}</text>
+    </view>
+    <view class="meta-row" wx:if="{{order.remark}}">
+      <text>订单备注</text>
+      <text class="meta-value">{{order.remark}}</text>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar" wx:if="{{statusInfo.type === 'pay'}}">
+    <view class="btn-red pay-btn" bindtap="onPayTap">去支付 ¥{{payYuan}}</view>
+  </view>
+</view>

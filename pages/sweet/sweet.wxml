@@ -1,0 +1,55 @@
+<view class="page">
+  <!-- 礼盒样式 -->
+  <view class="section">
+    <view class="section-title">① 选择礼盒样式</view>
+    <view class="boxes">
+      <view
+        wx:for="{{boxes}}"
+        wx:key="id"
+        class="box {{boxId === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onBoxTap"
+      >
+        <text class="box-icon">{{item.id === 'red' ? '🧧' : item.id === 'gold' ? '🏮' : '🎀'}}</text>
+        <view class="box-name">{{item.name}}</view>
+        <view class="box-desc">{{item.desc}}</view>
+      </view>
+    </view>
+    <view class="box-tip">礼盒样式暂作为偏好备注，下单后可在订单备注中说明</view>
+  </view>
+
+  <!-- 糖果选型 -->
+  <view class="section">
+    <view class="section-title">② 搭配糖果与好物</view>
+    <view class="candy-list" wx:if="{{products.length > 0}}">
+      <view class="candy card" wx:for="{{products}}" wx:key="id">
+        <image class="candy-img img-holder" src="{{item.thumb}}" mode="aspectFill" data-index="{{index}}" bindtap="goDetail" />
+        <view class="candy-info">
+          <view class="candy-name ellipsis-2" data-index="{{index}}" bindtap="goDetail">{{item.productName}}</view>
+          <view class="candy-price price"><text class="price-symbol">¥</text>{{item.priceYuan}}</view>
+          <view class="candy-out" wx:if="{{!item.hasStock}}">暂时缺货</view>
+        </view>
+        <view class="stepper" wx:if="{{item.hasStock}}">
+          <view class="step-btn {{item.quantity <= 0 ? 'disabled' : ''}}" data-index="{{index}}" data-type="minus" bindtap="onQtyChange">−</view>
+          <text class="step-num">{{item.quantity}}</text>
+          <view class="step-btn step-plus" data-index="{{index}}" data-type="plus" bindtap="onQtyChange">＋</view>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!loading && products.length === 0}}">
+      <view class="empty-icon">🍬</view>
+      <view>暂未上架喜糖商品，可先在分类页查看其他好物</view>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+
+  <!-- 底部预览栏 -->
+  <view class="bottom-bar">
+    <view class="preview">
+      <view class="preview-count">已选 {{totalCount}} 件</view>
+      <view class="preview-price price"><text class="price-symbol">¥</text><text class="preview-num">{{totalYuan}}</text></view>
+    </view>
+    <view class="add-btn btn-red {{submitting ? 'disabled' : ''}}" bindtap="onAddCart">加入购物车</view>
+  </view>
+</view>

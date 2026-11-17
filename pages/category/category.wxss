@@ -1,0 +1,102 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.search-bar {
+  background: #ffffff;
+  margin: 20rpx 24rpx;
+  border-radius: 999rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 41, 55, 0.06);
+}
+.search-icon {
+  font-size: 26rpx;
+  margin-right: 12rpx;
+}
+.search-placeholder {
+  color: #9ca3af;
+  font-size: 26rpx;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* 左侧一级 */
+.primary {
+  width: 200rpx;
+  background: #f0f1f3;
+  height: 100%;
+}
+.primary-item {
+  position: relative;
+  padding: 36rpx 24rpx;
+  font-size: 28rpx;
+  color: #4b5563;
+  text-align: center;
+}
+.primary-item.active {
+  background: #f6f7f9;
+  color: #14b8a6;
+  font-weight: 700;
+}
+.primary-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 48rpx;
+  border-radius: 0 8rpx 8rpx 0;
+  background: #14b8a6;
+}
+
+/* 右侧二级 */
+.secondary {
+  flex: 1;
+  background: #f6f7f9;
+  height: 100%;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+.secondary-group-title {
+  font-size: 26rpx;
+  color: #9ca3af;
+  margin: 12rpx 0 20rpx;
+}
+.secondary-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  margin-bottom: 24rpx;
+}
+.secondary-item {
+  width: calc(33.33% - 14rpx);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 16rpx 8rpx 20rpx;
+  box-sizing: border-box;
+}
+.secondary-icon {
+  width: 84rpx;
+  height: 84rpx;
+  border-radius: 16rpx;
+}
+.secondary-name {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: #374151;
+  max-width: 100%;
+  text-align: center;
+}

@@ -1,0 +1,39 @@
+<view class="page">
+  <!-- 排序栏 -->
+  <view class="sort-bar">
+    <view class="sort-item {{sort === 'default' ? 'active' : ''}}" data-key="default" bindtap="onSortTap">综合</view>
+    <view class="sort-item {{sort === 'sales' ? 'active' : ''}}" data-key="sales" bindtap="onSortTap">销量</view>
+    <view class="sort-item {{sort === 'priceAsc' || sort === 'priceDesc' ? 'active' : ''}}" data-key="price" bindtap="onSortTap">
+      价格
+      <text class="sort-arrow" wx:if="{{sort === 'priceAsc'}}">↑</text>
+      <text class="sort-arrow" wx:elif="{{sort === 'priceDesc'}}">↓</text>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="goods" wx:if="{{list.length > 0}}">
+    <view class="goods-item card" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+      <image class="goods-img img-holder" src="{{item.thumb}}" mode="aspectFill" lazy-load />
+      <view class="goods-info">
+        <view class="goods-name ellipsis-2">{{item.productName}}</view>
+        <view class="goods-sub ellipsis" wx:if="{{item.subtitle}}">{{item.subtitle}}</view>
+        <view class="goods-bottom">
+          <view class="price">
+            <text class="price-symbol">¥</text>
+            <text class="goods-price-num">{{item.priceYuan}}</text>
+          </view>
+          <text class="goods-sales">已售{{item.saleCount}}</text>
+        </view>
+        <view class="goods-out" wx:if="{{!item.hasStock}}">暂时缺货</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && list.length === 0}}">
+    <view class="empty-icon">🔍</view>
+    <view>没有找到相关商品</view>
+  </view>
+  <view class="list-footer" wx:if="{{list.length > 0}}">
+    {{finished ? '— 没有更多了 —' : (loading ? '加载中...' : '上拉加载更多')}}
+  </view>
+</view>

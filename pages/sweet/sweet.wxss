@@ -1,0 +1,139 @@
+.page {
+  padding-bottom: 160rpx;
+}
+.section {
+  padding: 28rpx 24rpx 0;
+}
+.section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+}
+
+.boxes {
+  display: flex;
+  gap: 20rpx;
+}
+.box {
+  flex: 1;
+  background: #ffffff;
+  border: 3rpx solid #f3f4f6;
+  border-radius: 20rpx;
+  padding: 24rpx 16rpx;
+  text-align: center;
+}
+.box.active {
+  border-color: #ef4444;
+  background: #fff5f5;
+}
+.box-icon {
+  font-size: 44rpx;
+}
+.box-name {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #374151;
+}
+.box-desc {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #9ca3af;
+}
+.box-tip {
+  margin-top: 16rpx;
+  font-size: 20rpx;
+  color: #f59e0b;
+}
+
+.candy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.candy {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+}
+.candy-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}
+.candy-info {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20rpx;
+}
+.candy-name {
+  font-size: 26rpx;
+  line-height: 1.4;
+}
+.candy-price {
+  margin-top: 10rpx;
+  font-size: 30rpx;
+}
+.candy-out {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #9ca3af;
+}
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  margin-left: 16rpx;
+}
+.step-btn {
+  width: 52rpx;
+  height: 52rpx;
+  background: #f3f4f6;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 48rpx;
+  font-size: 32rpx;
+  color: #374151;
+}
+.step-btn.disabled {
+  color: #d1d5db;
+}
+.step-plus {
+  background: #ef4444;
+  color: #ffffff;
+}
+.step-num {
+  min-width: 44rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.bottom-space {
+  height: 40rpx;
+}
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 24rpx calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(31, 41, 55, 0.06);
+}
+.preview-count {
+  font-size: 24rpx;
+  color: #6b7280;
+}
+.preview-num {
+  font-size: 36rpx;
+}
+.add-btn {
+  width: 280rpx;
+}
+.add-btn.disabled {
+  opacity: 0.6;
+}

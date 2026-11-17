@@ -1,0 +1,91 @@
+<view class="page">
+  <!-- 顶部搜索栏 -->
+  <view class="search-bar" bindtap="onSearchTap">
+    <view class="search-inner">
+      <text class="search-icon">🔍</text>
+      <text class="search-placeholder">搜索日化 / 喜糖好物</text>
+    </view>
+  </view>
+
+  <!-- Banner 轮播 -->
+  <swiper wx:if="{{banners.length > 0}}" class="banner-swiper" autoplay circular interval="4000" indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#14b8a6">
+    <swiper-item wx:for="{{banners}}" wx:key="index">
+      <image class="banner-img" src="{{item.cover}}" mode="aspectFill" data-item="{{item}}" bindtap="onBannerTap" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 新人礼包 -->
+  <view class="newbie card">
+    <view class="newbie-left">
+      <view class="newbie-title">新人专享礼包</view>
+      <view class="newbie-desc">满99减30 · 全场日化喜糖通用</view>
+    </view>
+    <view class="newbie-btn" catchtap="onZoneTap" data-type="daily">立即领取</view>
+  </view>
+
+  <!-- 双专区入口 -->
+  <view class="zones">
+    <view class="zone card zone-daily" bindtap="onZoneTap" data-type="daily">
+      <view class="zone-name">日化专区</view>
+      <view class="zone-desc">家庭日常补给</view>
+    </view>
+    <view class="zone card zone-sweet" bindtap="onZoneTap" data-type="sweet">
+      <view class="zone-name">喜糖专区</view>
+      <view class="zone-desc">喜庆好礼定制</view>
+    </view>
+  </view>
+
+  <!-- 分类图标导航 -->
+  <view class="entries card" wx:if="{{categoryEntries.length > 0}}">
+    <view class="entry" wx:for="{{categoryEntries}}" wx:key="index" data-item="{{item}}" bindtap="onEntryTap">
+      <image class="entry-icon img-holder" src="{{item.cover}}" mode="aspectFill" />
+      <text class="entry-name ellipsis">{{item.title}}</text>
+    </view>
+  </view>
+
+  <!-- 限时秒杀 / 热销 -->
+  <view class="floor card" wx:if="{{hotProducts.length > 0}}">
+    <view class="floor-head">
+      <view class="floor-title">限时秒杀</view>
+      <view class="floor-more" bindtap="onZoneTap" data-type="daily">更多 ›</view>
+    </view>
+    <view class="seckill-row">
+      <view class="seckill-item" wx:for="{{hotProducts}}" wx:key="index" data-item="{{item}}" bindtap="onProductTap">
+        <image class="seckill-img img-holder" src="{{item.cover}}" mode="aspectFill" />
+        <view class="seckill-name ellipsis">{{item.title}}</view>
+        <view class="seckill-price">抢</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 新品上架 -->
+  <view class="floor card" wx:if="{{newProducts.length > 0}}">
+    <view class="floor-head">
+      <view class="floor-title">新品上架</view>
+    </view>
+    <view class="seckill-row">
+      <view class="seckill-item" wx:for="{{newProducts}}" wx:key="index" data-item="{{item}}" bindtap="onProductTap">
+        <image class="seckill-img img-holder" src="{{item.cover}}" mode="aspectFill" />
+        <view class="seckill-name ellipsis">{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 猜你喜欢 -->
+  <view class="floor card" wx:if="{{recommendProducts.length > 0}}">
+    <view class="floor-head">
+      <view class="floor-title">猜你喜欢</view>
+    </view>
+    <view class="rec-grid">
+      <view class="rec-item" wx:for="{{recommendProducts}}" wx:key="index" data-item="{{item}}" bindtap="onProductTap">
+        <image class="rec-img img-holder" src="{{item.cover}}" mode="aspectFill" />
+        <view class="rec-name ellipsis-2">{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && banners.length === 0 && recommendProducts.length === 0}}">
+    <view class="empty-icon">🛍️</view>
+    <view>首页暂无内容，请联系运营配置</view>
+  </view>
+</view>

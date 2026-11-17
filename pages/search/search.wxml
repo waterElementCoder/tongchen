@@ -1,0 +1,57 @@
+<view class="page">
+  <!-- 搜索框 -->
+  <view class="search-row">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        value="{{keyword}}"
+        placeholder="搜索商品"
+        confirm-type="search"
+        focus
+        bindinput="onInput"
+        bindconfirm="onConfirm"
+      />
+    </view>
+    <view class="search-btn" bindtap="doSearch">搜索</view>
+  </view>
+
+  <!-- 未搜索：历史 + 热门 -->
+  <block wx:if="{{!searched}}">
+    <view class="section" wx:if="{{history.length > 0}}">
+      <view class="section-head">
+        <text class="section-title">历史搜索</text>
+        <text class="section-clear" bindtap="onClearHistory">清空</text>
+      </view>
+      <view class="tags">
+        <view class="tag" wx:for="{{history}}" wx:key="*this" data-word="{{item}}" bindtap="onHistoryTap">{{item}}</view>
+      </view>
+    </view>
+    <view class="section">
+      <view class="section-head">
+        <text class="section-title">热门搜索</text>
+      </view>
+      <view class="tags">
+        <view class="tag" wx:for="{{hot}}" wx:key="*this" data-word="{{item}}" bindtap="onHotTap">{{item}}</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 搜索结果 -->
+  <block wx:else>
+    <view class="result-tip" wx:if="{{list.length > 0}}">共 {{total}} 件商品</view>
+    <view class="goods" wx:if="{{list.length > 0}}">
+      <view class="goods-item card" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+        <image class="goods-img img-holder" src="{{item.thumb}}" mode="aspectFill" lazy-load />
+        <view class="goods-info">
+          <view class="goods-name ellipsis-2">{{item.productName}}</view>
+          <view class="price"><text class="price-symbol">¥</text><text class="goods-price-num">{{item.priceYuan}}</text></view>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!loading && list.length === 0}}">
+      <view class="empty-icon">🔍</view>
+      <view>没有找到相关商品</view>
+    </view>
+  </block>
+</view>

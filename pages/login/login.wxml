@@ -1,0 +1,50 @@
+<view class="page">
+  <!-- Logo -->
+  <view class="logo-area">
+    <view class="logo">日喜</view>
+    <view class="logo-name">日喜优选</view>
+    <view class="logo-slogan">日常好物 · 喜庆好礼</view>
+  </view>
+
+  <!-- 步骤一：微信一键登录 -->
+  <block wx:if="{{step === 'login'}}">
+    <view class="login-btn btn-primary {{loading ? 'disabled' : ''}}" bindtap="onLogin">
+      {{loading ? '登录中...' : (devMode ? '保存并登录' : '微信一键登录')}}
+    </view>
+
+    <!-- 开发模式：手动填 token -->
+    <view class="dev-panel card" wx:if="{{devMode}}">
+      <view class="dev-title">开发模式</view>
+      <view class="dev-desc">后端登录接口（config.loginUrl）尚未配置，请先在 Apifox / Postman 调用登录接口获取 token，粘贴到下方：</view>
+      <input class="dev-input" placeholder="粘贴 Bearer token" value="{{devToken}}" bindinput="onTokenInput" />
+    </view>
+
+    <view class="tip" wx:else>登录后可同步购物车、订单与收货地址</view>
+  </block>
+
+  <block wx:else>
+    <!-- 步骤二：授权手机号 -->
+    <view class="phone-card card">
+      <view class="phone-title">绑定手机号</view>
+      <view class="phone-desc">
+        为保证订单、物流信息能及时送达，请授权绑定你的微信手机号。
+      </view>
+      <button class="phone-btn-primary" open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber">
+        微信授权手机号
+      </button>
+      <view class="phone-skip" bindtap="onSkipPhone">暂不绑定，先逛逛</view>
+    </view>
+  </block>
+
+  <!-- 协议 -->
+  <view class="agree-row">
+    <checkbox-group bindchange="onAgreeChange">
+      <label class="agree-label">
+        <checkbox value="agree" checked="{{agreed}}" color="#14b8a6" />
+        <text class="agree-text">登录即代表同意《用户协议》与《隐私政策》</text>
+      </label>
+    </checkbox-group>
+  </view>
+
+  <view class="skip" bindtap="goHome">暂不登录，先逛逛 ›</view>
+</view>

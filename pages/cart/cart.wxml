@@ -1,0 +1,56 @@
+<view class="page">
+  <!-- 未登录 -->
+  <view class="empty" wx:if="{{!loading && items.length === 0}}">
+    <view class="empty-icon">🛒</view>
+    <view>购物车还是空的</view>
+    <view class="empty-actions">
+      <view class="btn-secondary" bindtap="goHome">去逛逛</view>
+      <view class="btn-secondary" bindtap="goLogin" style="margin-left: 20rpx;">去登录</view>
+    </view>
+  </view>
+
+  <block wx:if="{{items.length > 0}}">
+    <!-- 商品列表 -->
+    <view class="cart-list">
+      <view class="cart-item card" wx:for="{{items}}" wx:key="id">
+        <view
+          class="check {{item.selected ? 'checked' : ''}}"
+          data-index="{{index}}"
+          bindtap="onToggle"
+        >{{item.selected ? '✓' : ''}}</view>
+        <image class="cart-img img-holder" src="{{item.imageUrl}}" mode="aspectFill" data-index="{{index}}" bindtap="goDetail" />
+        <view class="cart-info">
+          <view class="cart-name ellipsis-2" data-index="{{index}}" bindtap="goDetail">{{item.name}}</view>
+          <view class="cart-spec ellipsis" wx:if="{{item.specText}}">{{item.specText}}</view>
+          <view class="cart-missing" wx:if="{{item.missing}}">商品信息待同步，下单前请重新确认</view>
+          <view class="cart-bottom">
+            <view class="price">
+              <text class="price-symbol">¥</text>
+              <text class="cart-price-num">{{item.priceYuan}}</text>
+            </view>
+            <view class="qty-row">
+              <view class="qty-btn {{item.quantity <= 1 ? 'disabled' : ''}}" data-index="{{index}}" data-type="minus" bindtap="onQtyChange">−</view>
+              <text class="qty-num">{{item.quantity}}</text>
+              <view class="qty-btn" data-index="{{index}}" data-type="plus" bindtap="onQtyChange">＋</view>
+            </view>
+          </view>
+        </view>
+        <view class="cart-del" data-index="{{index}}" bindtap="onDelete">删除</view>
+      </view>
+    </view>
+
+    <!-- 底部结算栏 -->
+    <view class="checkout-bar">
+      <view class="check {{allSelected ? 'checked' : ''}}" bindtap="onToggleAll">{{allSelected ? '✓' : ''}}</view>
+      <text class="all-label">全选</text>
+      <view class="total">
+        <text class="total-label">合计：</text>
+        <view class="price">
+          <text class="price-symbol">¥</text>
+          <text class="total-num">{{totalYuan}}</text>
+        </view>
+      </view>
+      <view class="checkout-btn btn-red" bindtap="goCheckout">去结算</view>
+    </view>
+  </block>
+</view>

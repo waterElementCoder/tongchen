@@ -1,0 +1,95 @@
+/* 全局样式：日喜优选
+   主色 #14B8A6 蓝绿 / 强调 #EF4444 红 / 圆角 12px 卡片 */
+page {
+  background: #f6f7f9;
+  color: #1f2937;
+  font-size: 28rpx;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+}
+
+/* 通用卡片 */
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 41, 55, 0.04);
+}
+
+/* 价格样式：红色加粗，原价灰色划线 */
+.price {
+  color: #ef4444;
+  font-weight: 700;
+}
+.price-symbol {
+  font-size: 22rpx;
+}
+.price-origin {
+  color: #9ca3af;
+  font-size: 22rpx;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+/* 主按钮：蓝绿实底白字 */
+.btn-primary {
+  background: #14b8a6;
+  color: #ffffff;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  line-height: 88rpx;
+  text-align: center;
+}
+.btn-primary.disabled {
+  background: #a7ded7;
+}
+/* 次按钮：浅蓝绿底主色字 */
+.btn-secondary {
+  background: #e6f7f4;
+  color: #14b8a6;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  line-height: 64rpx;
+  padding: 0 28rpx;
+  display: inline-block;
+}
+/* 红色主按钮（喜庆/支付场景） */
+.btn-red {
+  background: #ef4444;
+  color: #ffffff;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  line-height: 88rpx;
+  text-align: center;
+}
+
+/* 空状态 */
+.empty {
+  padding: 160rpx 0;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 26rpx;
+}
+.empty-icon {
+  font-size: 88rpx;
+  margin-bottom: 24rpx;
+}
+
+/* 单行/多行省略 */
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ellipsis-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 图片占位背景 */
+.img-holder {
+  background: #f0f1f3;
+}

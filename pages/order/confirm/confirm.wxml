@@ -1,0 +1,73 @@
+<view class="page">
+  <!-- 收货地址 -->
+  <view class="address card" bindtap="goChooseAddress" wx:if="{{address}}">
+    <view class="addr-icon">📍</view>
+    <view class="addr-info">
+      <view class="addr-top">
+        <text class="addr-name">{{address.receiverName}}</text>
+        <text class="addr-phone">{{address.receiverPhone}}</text>
+      </view>
+      <view class="addr-detail">{{address.provinceName}}{{address.cityName}}{{address.districtName}}{{address.detailAddress}}</view>
+    </view>
+    <text class="addr-arrow">›</text>
+  </view>
+  <view class="address card address-empty" bindtap="goAddAddress" wx:else>
+    <text class="addr-plus">＋</text>
+    <text>请添加收货地址</text>
+    <text class="addr-arrow">›</text>
+  </view>
+
+  <!-- 商品清单 -->
+  <view class="goods card">
+    <view class="goods-item" wx:for="{{lines}}" wx:key="skuId">
+      <image class="goods-img img-holder" src="{{item.imageUrl}}" mode="aspectFill" />
+      <view class="goods-info">
+        <view class="goods-name ellipsis-2">{{item.productName || item.skuName}}</view>
+        <view class="goods-spec ellipsis" wx:if="{{item.specText}}">{{item.specText}}</view>
+        <view class="goods-bottom">
+          <view class="price">
+            <text class="price-symbol">¥</text>
+            <text class="goods-price-num">{{item.priceYuan}}</text>
+          </view>
+          <text class="goods-qty">×{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="remark card">
+    <text class="remark-label">订单备注</text>
+    <input class="remark-input" placeholder="选填，给商家留言" value="{{remark}}" bindinput="onRemarkInput" />
+  </view>
+
+  <!-- 金额明细 -->
+  <view class="amount card" wx:if="{{previewed}}">
+    <view class="amount-row">
+      <text>商品金额</text>
+      <text>¥{{productYuan}}</text>
+    </view>
+    <view class="amount-row">
+      <text>运费</text>
+      <text>{{freightAmount > 0 ? '¥' + freightYuan : '免运费'}}</text>
+    </view>
+    <view class="amount-row" wx:if="{{discountAmount > 0}}">
+      <text>优惠</text>
+      <text class="amount-discount">-¥{{discountYuan}}</text>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+
+  <!-- 提交栏 -->
+  <view class="submit-bar">
+    <view class="total">
+      <text class="total-label">实付：</text>
+      <view class="price">
+        <text class="price-symbol">¥</text>
+        <text class="total-num">{{payYuan}}</text>
+      </view>
+    </view>
+    <view class="submit-btn btn-red {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">提交订单</view>
+  </view>
+</view>

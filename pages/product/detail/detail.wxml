@@ -1,0 +1,131 @@
+<!-- 加载失败 -->
+<view class="page err-page" wx:if="{{loadError}}">
+  <view class="err-icon">⚠️</view>
+  <view class="err-title">商品加载失败</view>
+  <view class="err-desc">{{errMsg || '商品信息暂时无法获取，请稍后重试'}}</view>
+  <button class="btn-primary err-btn" bindtap="onRetry">重新加载</button>
+</view>
+
+<view class="page" wx:if="{{detail}}">
+  <!-- 主图轮播 -->
+  <swiper class="main-swiper" autoplay circular interval="4000" indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#14b8a6">
+    <swiper-item wx:for="{{images}}" wx:key="index">
+      <image class="main-img img-holder" src="{{item}}" mode="aspectFill" data-url="{{item}}" bindtap="onPreview" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 价格与标题 -->
+  <view class="head card">
+    <view class="price-row">
+      <view class="price">
+        <text class="price-symbol">¥</text>
+        <text class="head-price-num">{{priceYuan}}</text>
+      </view>
+      <text class="price-origin" wx:if="{{marketYuan}}">¥{{marketYuan}}</text>
+      <text class="sales-tag" wx:if="{{detail.saleCount}}">已售{{detail.saleCount}}</text>
+    </view>
+    <view class="title">{{detail.productName}}</view>
+    <view class="subtitle" wx:if="{{detail.subtitle}}">{{detail.subtitle}}</view>
+    <view class="sub-row" wx:if="{{detail.unitName || stockText}}">
+      <text wx:if="{{detail.unitName}}" class="unit">单位：{{detail.unitName}}</text>
+      <text class="stock">{{stockText}}</text>
+    </view>
+  </view>
+
+  <!-- 喜糖定制入口 -->
+  <view class="sweet-entry card" wx:if="{{sweetMode}}" bindtap="onSweetTap">
+    <view class="sweet-left">
+      <view class="sweet-title">🎁 想要自由搭配礼盒？</view>
+      <view class="sweet-desc">进入喜糖定制，糖果礼盒随心组合</view>
+    </view>
+    <view class="btn-secondary">去定制</view>
+  </view>
+
+  <!-- 商品信息 -->
+  <view class="info card">
+    <view class="info-row">
+      <text class="info-label">分类</text>
+      <text class="info-value">{{detail.category.categoryName || '-'}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">编号</text>
+      <text class="info-value">{{detail.productNo}}</text>
+    </view>
+  </view>
+
+  <!-- 图文详情 -->
+  <view class="detail card">
+    <view class="detail-title">商品详情</view>
+    <block wx:if="{{detailImages.length > 0}}">
+      <image wx:for="{{detailImages}}" wx:key="index" class="detail-img" src="{{item}}" mode="widthFix" lazy-load />
+    </block>
+    <rich-text wx:elif="{{detail.detailContent}}" nodes="{{detail.detailContent}}"></rich-text>
+    <view class="empty" wx:else>
+      <view>暂无图文详情</view>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bar-icon" bindtap="onFavTap">
+      <!-- 未收藏：空心红心（仅红色描边）；已收藏：实心红心 -->
+      <view class="icon-heart {{isFav ? 'icon-heart--fill' : 'icon-heart--outline'}}"></view>
+      <text class="bar-icon-text">{{isFav ? '已收藏' : '收藏'}}</text>
+    </view>
+    <view class="bar-icon" bindtap="goCart">
+      <text class="bar-icon-emoji">🛒</text>
+      <text class="bar-icon-text">购物车</text>
+    </view>
+    <view class="bar-btn btn-secondary bar-cart" bindtap="openSkuPopup" data-mode="cart">加入购物车</view>
+    <view class="bar-btn btn-primary bar-buy" bindtap="openSkuPopup" data-mode="buy">立即购买</view>
+  </view>
+
+  <!-- SKU 选择弹窗 -->
+  <view class="mask" wx:if="{{showSkuPopup}}" bindtap="closeSkuPopup">
+    <view class="sku-popup" catchtap="stopBubble">
+      <view class="sku-head">
+        <image class="sku-img img-holder" src="{{currentSku.image || images[0]}}" mode="aspectFill" />
+        <view class="sku-head-info">
+          <view class="price"><text class="price-symbol">¥</text><text class="sku-price-num">{{priceYuan}}</text></view>
+          <view class="sku-stock">{{stockText}}</view>
+          <view class="sku-chosen" wx:if="{{currentSku}}">已选：{{currentSku.specText || '默认规格'}} × {{quantity}}</view>
+        </view>
+        <view class="sku-close" bindtap="closeSkuPopup">✕</view>
+      </view>
+
+      <scroll-view class="sku-body" scroll-y>
+        <view class="spec-group" wx:for="{{specs}}" wx:key="specName" wx:for-item="spec">
+          <view class="spec-name">{{spec.specName}}</view>
+          <view class="spec-values">
+            <view
+              wx:for="{{spec.specValues}}"
+              wx:key="*this"
+              wx:for-item="val"
+              class="spec-value {{selected[spec.specName] === val ? 'active' : ''}}"
+              data-name="{{spec.specName}}"
+              data-value="{{val}}"
+              bindtap="onSpecTap"
+            >{{val}}</view>
+          </view>
+        </view>
+
+        <view class="spec-group">
+          <view class="spec-name">数量</view>
+          <view class="qty-row">
+            <view class="qty-btn {{quantity <= 1 ? 'disabled' : ''}}" data-type="minus" bindtap="onQuantityChange">−</view>
+            <input class="qty-input" type="number" value="{{quantity}}" bindinput="onQuantityInput" />
+            <view class="qty-btn" data-type="plus" bindtap="onQuantityChange">＋</view>
+          </view>
+        </view>
+      </scroll-view>
+
+      <view class="sku-footer">
+        <view class="btn-primary {{canBuy ? '' : 'disabled'}}" bindtap="onConfirmSku">
+          {{buyMode === 'cart' ? '加入购物车' : '立即购买'}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

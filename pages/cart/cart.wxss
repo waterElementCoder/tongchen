@@ -1,0 +1,146 @@
+.page {
+  padding: 24rpx 24rpx 160rpx;
+}
+
+.empty-actions {
+  margin-top: 32rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  position: relative;
+}
+.check {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 3rpx solid #d1d5db;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+.check.checked {
+  background: #14b8a6;
+  border-color: #14b8a6;
+}
+.cart-img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+}
+.cart-info {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20rpx;
+}
+.cart-name {
+  font-size: 26rpx;
+  line-height: 1.4;
+  padding-right: 80rpx;
+}
+.cart-spec {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #9ca3af;
+  background: #f3f4f6;
+  border-radius: 8rpx;
+  padding: 4rpx 12rpx;
+  display: inline-block;
+  max-width: 100%;
+}
+.cart-missing {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #f59e0b;
+}
+.cart-bottom {
+  margin-top: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cart-price-num {
+  font-size: 32rpx;
+}
+.qty-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.qty-btn {
+  width: 52rpx;
+  height: 52rpx;
+  background: #f3f4f6;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 48rpx;
+  font-size: 32rpx;
+  color: #374151;
+}
+.qty-btn.disabled {
+  color: #d1d5db;
+}
+.qty-num {
+  min-width: 48rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.cart-del {
+  position: absolute;
+  right: 24rpx;
+  top: 24rpx;
+  color: #9ca3af;
+  font-size: 24rpx;
+  padding: 4rpx 8rpx;
+}
+
+.checkout-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(31, 41, 55, 0.06);
+}
+.checkout-bar .check {
+  margin-right: 12rpx;
+}
+.all-label {
+  font-size: 24rpx;
+  color: #6b7280;
+}
+.total {
+  margin-left: auto;
+  display: flex;
+  align-items: baseline;
+  margin-right: 20rpx;
+}
+.total-label {
+  font-size: 24rpx;
+  color: #6b7280;
+}
+.total-num {
+  font-size: 36rpx;
+}
+.checkout-btn {
+  width: 220rpx;
+  line-height: 80rpx;
+}
